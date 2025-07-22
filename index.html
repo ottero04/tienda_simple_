@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OTechnology</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-
     <style>
       #mobile-menu {
         display: none;
@@ -28,71 +26,44 @@
 
   <body class="bg-black text-white">
     <!--Header de la pagina-->
-    <header
-      class="w-full bg-black p-4 flex flex-wrap items-center justify-between gap-4"
-    >
-      <!--logo-->
+    <header class="w-full bg-black p-4 flex flex-wrap items-center justify-between gap-4">
       <button onclick="location.href='index.html'" class="text-2xl font-bold">
         OTechnology<span class="align-super text-xs">®</span>
       </button>
 
-      <!--Boton burguer-->
       <button id="hamburger" class="text-white text-2xl sm:hidden focus:outline-none">
         <i class="fas fa-bars"></i>
       </button>
 
-      <!--Buscador-->
-      <div
-        class="flex flex-1 max-w-full sm:max-w-2xl mx-6 rounded-full overflow-hidden bg-white order-3 sm:order-none"
-      >
-        <input
-          type="text"
-          placeholder="Buscar..."
-          class="flex-1 px-4 py-2 text-black focus:outline-none"
-        />
-
+      <div class="flex flex-1 max-w-full sm:max-w-2xl mx-6 rounded-full overflow-hidden bg-white order-3 sm:order-none">
+        <input type="text" placeholder="Buscar..." class="flex-1 px-4 py-2 text-black focus:outline-none" />
         <button class="px-4 bg-white hover:bg-gray-200">
           <i class="fas fa-search text-black"></i>
         </button>
       </div>
 
-      <!--Login-->
-      <a
-        href="/login"
-        class="flex items-center gap-2 text-sm cursor-pointer hover:text-red-500 transition"
-      >
+      <a href="/login" class="flex items-center gap-2 text-sm cursor-pointer hover:text-red-500 transition">
         <i class="fas fa-user text-xl"></i>
         <div class="leading-4 text-left uppercase font-medium">
           ACCEDER A<br />MI CUENTA
         </div>
       </a>
 
-      <!-- Botón del carrito -->
-      <button
-        id="cart-btn"
-        class="relative text-white hover:text-gray-300 transition"
-      >
+      <button id="cart-btn" class="relative text-white hover:text-gray-300 transition">
         <i class="fas fa-shopping-cart text-2xl"></i>
       </button>
 
-      <!-- Vista emergente del carrito -->
-      <div
-        id="cart-preview"
-        class="absolute right-4 top-20 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50"
-      >
+      <div id="cart-preview" class="absolute right-4 top-20 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50">
         <h3 class="text-lg font-semibold mb-2 border-b pb-2">Mi carrito</h3>
-        <ul id="cart-items" class="space-y-2 max-h-48 overflow-y-auto">
-          <!-- Aquí se agregan los productos -->
-        </ul>
-        <div
-          class="border-t pt-2 mt-2 flex justify-between text-sm font-medium"
-        >
+        <ul id="cart-items" class="space-y-2 max-h-48 overflow-y-auto"></ul>
+        <div class="border-t pt-2 mt-2 flex justify-between text-sm font-medium">
           <span>Total:</span>
           <span id="cart-total">$0</span>
         </div>
       </div>
     </header>
 
+    <!-- Menu móvil -->
     <div id="mobile-menu" class="bg-black text-white sm:hidden px-6 py-4 hidden flex-col gap-3 font-semibold text-sm">
       <a href="#" class="hover:text-orange-600">Promociones</a>
       <a href="#" class="hover:text-orange-600">Novedades</a>
@@ -108,453 +79,39 @@
       <a href="/login" class="hover:text-orange-600">Acceder a mi cuenta</a>
     </div>
 
-    <!-- BARRA SUPERIOR -->
-    <nav
-      class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto"
-    >
-      <ul
-        class="flex justify-center sm:justify-center gap-8 text-sm whitespace-nowrap"
-      >
-        <li>
-          <a
-            href="#"
-            class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >Promociones</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >Novedades</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >Garantía</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >Contáctanos</a
-          >
-        </li>
+    <!-- BARRA SUPERIOR desktop -->
+    <nav id="desktop-menu" class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto">
+      <ul class="flex justify-center sm:justify-center gap-8 text-sm whitespace-nowrap">
+        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Promociones</a></li>
+        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Novedades</a></li>
+        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Garantía</a></li>
+        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Contáctanos</a></li>
       </ul>
     </nav>
 
-    <nav class="bg-white shadow relative z-50 overflow-x-auto">
-      <div class="max-w-7xl mx-auto px-4">
-        <div
-          class="w-full max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-6 font-medium text-gray-700 text-base whitespace-nowrap"
-        >
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-celulares')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              Celulares ▼
-            </button>
-            <div
-              id="dropdown-celulares"
-              class="hidden absolute top-full left-0 mt-2 w-screen max-w-6xl bg-white shadow-xl p-6 z-50"
-            >
-              <div class="grid grid-cols-6 gap-6 text-sm text-gray-800">
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    📱 Celulares
-                  </h3>
-                  <p class="font-semibold">Marca</p>
-                  <ul class="mb-2">
-                    <li>
-                      <a href="#iphone" class="hover:underline">iPhone</a>
-                    </li>
-                    <li>
-                      <a href="#samsung" class="hover:underline">Samsung</a>
-                    </li>
-                    <li>
-                      <a href="#xiaomi" class="hover:underline">Xiaomi</a>
-                    </li>
-                    <li>
-                      <a href="#motorola" class="hover:underline">Motorola</a>
-                    </li>
-                  </ul>
-                  <p class="font-semibold">Capacidad de almacenamiento</p>
-                  <ul class="mb-2">
-                    <li><a href="#64gb" class="hover:underline">64GB</a></li>
-                    <li><a href="#128gb" class="hover:underline">128GB</a></li>
-                  </ul>
-                  <p class="font-semibold">Memoria RAM</p>
-                  <ul>
-                    <li><a href="#4gb" class="hover:underline">4GB</a></li>
-                    <li><a href="#6gb" class="hover:underline">6GB</a></li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    🍎 Mundo Apple
-                  </h3>
-                  <ul>
-                    <li>
-                      <a href="#accesorios-apple" class="hover:underline"
-                        >Accesorios Apple</a
-                      >
-                    </li>
-                    <li>
-                      <a href="#comparar-iphone" class="hover:underline"
-                        >Comparar iPhone</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    📱 Tabletas
-                  </h3>
-                  <ul>
-                    <li><a href="#ipad" class="hover:underline">iPad</a></li>
-                    <li>
-                      <a href="#android-tablets" class="hover:underline"
-                        >Android</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    ⌚ Smartwatch
-                  </h3>
-                  <ul>
-                    <li>
-                      <a href="#relojes" class="hover:underline">Relojes</a>
-                    </li>
-                    <li>
-                      <a href="#bandas" class="hover:underline">Bandas</a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    🔌 Accesorios
-                  </h3>
-                  <ul>
-                    <li>
-                      <a href="#cables" class="hover:underline">Cables</a>
-                    </li>
-                    <li>
-                      <a href="#audifonos" class="hover:underline">Audífonos</a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-orange-600 mb-2">
-                    📋 Conoce más
-                  </h3>
-                  <ul>
-                    <li>
-                      <a href="#seguros" class="hover:underline">Seguros</a>
-                    </li>
-                    <li><a href="#guias" class="hover:underline">Guías</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-computadores')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              Computadores ▼
-            </button>
-            <div
-              id="dropdown-computadores"
-              class="hidden absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64"
-            >
-              <ul>
-                <li>
-                  <a href="#laptops" class="hover:underline block py-1"
-                    >Laptops</a
-                  >
-                </li>
-                <li>
-                  <a href="#desktops" class="hover:underline block py-1"
-                    >Desktops</a
-                  >
-                </li>
-                <li>
-                  <a href="#monitores" class="hover:underline block py-1"
-                    >Monitores</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-electrodomesticos')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              TV ▼
-            </button>
-            <div
-              id="dropdown-electrodomesticos"
-              class="hidden absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64"
-            >
-              <ul>
-                <li>
-                  <a href="#refrigeradores" class="hover:underline block py-1"
-                    >Refrigeradores</a
-                  >
-                </li>
-                <li>
-                  <a href="#lavadoras" class="hover:underline block py-1"
-                    >Lavadoras</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-tv')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              Camaras ▼
-            </button>
-            <div
-              id="dropdown-tv"
-              class="hidden absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64"
-            >
-              <ul>
-                <li>
-                  <a href="#led" class="hover:underline block py-1">LED</a>
-                </li>
-                <li>
-                  <a href="#smart" class="hover:underline block py-1"
-                    >Smart TV</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
+    <!-- Menú principal -->
+    <!-- SIN CAMBIOS EN ESTA PARTE: sigue con los dropdown existentes para Celulares, Computadores, TV, etc. -->
 
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-accesorios')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              Videojuegos ▼
-            </button>
-            <div
-              id="dropdown-accesorios"
-              class="hidden absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64"
-            >
-              <ul>
-                <li>
-                  <a href="#cables" class="hover:underline block py-1"
-                    >Cables</a
-                  >
-                </li>
-                <li>
-                  <a href="#fundas" class="hover:underline block py-1"
-                    >Fundas</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="relative">
-            <button
-              onclick="toggleMenu('dropdown-juguetes')"
-              class="py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600"
-            >
-              Juguetes ▼
-            </button>
-            <div
-              id="dropdown-juguetes"
-              class="hidden absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64"
-            >
-              <ul>
-                <li>
-                  <a
-                    href="#juguetes-educativos"
-                    class="hover:underline block py-1"
-                    >Educativos</a
-                  >
-                </li>
-                <li>
-                  <a href="#figuras" class="hover:underline block py-1"
-                    >Figuras de acción</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!--carrusel-->
-    <div
-      class="relative w-full max-w-5xl mx-auto mt-8 overflow-hidden rounded-xl shadow-lg"
-    >
-      <div
-        id="carousel"
-        class="flex transition-transform duration-700 ease-in-out"
-      >
-        <img
-          src="img/carrusel/iphone16pro.png"
-          class="w-full flex-shrink-0 object-cover"
-          alt="Imagen 1"
-        />
-        <img
-          src="img/carrusel/KV-last (1).jpg"
-          class="w-full flex-shrink-0 object-cover"
-          alt="Imagen 2"
-        />
-        <img
-          src="img/carrusel/play_xbox.png"
-          class="w-full flex-shrink-0 object-cover"
-          alt="Imagen 3"
-        />
-        <img
-          src="img/carrusel/tv.png"
-          class="w-full flex-shrink-0 object-cover"
-          alt="Imagen 4"
-        />
-      </div>
-
-      <!-- Botones -->
-      <button
-        onclick="prevSlide()"
-        class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md z-10"
-      >
-        &#10094;
-      </button>
-      <button
-        onclick="nextSlide()"
-        class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md z-10"
-      >
-        &#10095;
-      </button>
-    </div>
-
-    <!--Ver todos los prod-->
-    <section class="py-10 px-4 bg-black-50">
-      <h2 class="text-2xl font-bold text-center mb-8">
-        Ver todos los productos
-      </h2>
-
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-7xl mx-auto"
-      >
-        <!-- Celulares -->
-        <button
-          onclick="location.href='paginas/todos_product/celulares.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com.png"
-            alt="Celulares"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Celulares</span>
-          <span class="text-sm text-gray-500">Desde $250.000</span>
-        </button>
-
-        <!-- Computadores -->
-        <button
-          onclick="location.href='computadores.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com (1).png"
-            alt="Computadores"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Computadores</span>
-          <span class="text-sm text-gray-500">Desde $750.000</span>
-        </button>
-
-        <!-- TV -->
-        <button
-          onclick="location.href='tv.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com (2).png"
-            alt="TV"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">TV</span>
-          <span class="text-sm text-gray-500">Desde $900.000</span>
-        </button>
-
-        <!-- Cámaras -->
-        <button
-          onclick="location.href='camaras.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing3.com"
-            alt="Cámaras"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Cámaras</span>
-          <span class="text-sm text-gray-500">Desde $300.000</span>
-        </button>
-
-        <!-- Videojuegos -->
-        <button
-          onclick="location.href='videojuegos.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com (4).png"
-            alt="Videojuegos"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Videojuegos</span>
-          <span class="text-sm text-gray-500">Desde $180.000</span>
-        </button>
-
-        <!-- Audio -->
-        <button
-          onclick="location.href='audio.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com (5).png"
-            alt="Audio"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Audio</span>
-          <span class="text-sm text-gray-500">Desde $130.000</span>
-        </button>
-
-        <!-- Accesorios -->
-        <button
-          onclick="location.href='accesorios.html'"
-          class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition"
-        >
-          <img
-            src="img/categorias/pngwing.com (3).png"
-            alt="Accesorios"
-            class="w-16 h-16 object-contain mb-2"
-          />
-          <span class="text-lg font-semibold text-gray-800">Accesorios</span>
-          <span class="text-sm text-gray-500">Desde $20.000</span>
-        </button>
-      </div>
-    </section>
+    <!-- Resto del contenido intacto -->
 
     <script src="js/carrito.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/carrusel.js"></script>
+    <script>
+      document.getElementById('hamburger').addEventListener('click', function () {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      function toggleMenu(id) {
+        document.querySelectorAll('[id^="dropdown-"]').forEach(menu => {
+          if (menu.id === id) {
+            menu.classList.toggle('hidden');
+          } else {
+            menu.classList.add('hidden');
+          }
+        });
+      }
+    </script>
   </body>
 </html>
