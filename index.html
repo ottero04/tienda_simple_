@@ -14,11 +14,16 @@
 
   <body class="bg-black text-white">
     <!--Header de la pagina-->
-    <header class="w-full bg-black p-4 flex items-center justify-between gap-4">
+    <header
+      class="w-full bg-black p-4 flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
       <!--logo-->
       <button onclick="location.href='index.html'" class="text-2xl font-bold">
         OTechnology<span class="align-super text-xs">®</span>
       </button>
+
+      <!-- Botón hamburguesa (visible solo en pantallas pequeñas) -->
+      <button id="menu-toggle" class="sm:hidden text-white text-3xl">☰</button>
 
       <!--Buscador-->
       <div
