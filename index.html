@@ -15,19 +15,16 @@
   <body class="bg-black text-white">
     <!--Header de la pagina-->
     <header
-      class="w-full bg-black p-4 flex flex-col sm:flex-row items-center justify-between gap-4"
+      class="w-full bg-black p-4 flex flex-wrap items-center justify-between gap-4"
     >
       <!--logo-->
       <button onclick="location.href='index.html'" class="text-2xl font-bold">
         OTechnology<span class="align-super text-xs">®</span>
       </button>
 
-      <!-- Botón hamburguesa (visible solo en pantallas pequeñas) -->
-      <button id="menu-toggle" class="sm:hidden text-white text-3xl">☰</button>
-
       <!--Buscador-->
       <div
-        class="flex flex-1 max-w-2xl mx-6 rounded-full overflow-hidden bg-white"
+        class="flex flex-1 max-w-full sm:max-w-2xl mx-6 rounded-full overflow-hidden bg-white order-3 sm:order-none"
       >
         <input
           type="text"
@@ -40,6 +37,7 @@
         </button>
       </div>
 
+      <!--Login-->
       <a
         href="/login"
         class="flex items-center gap-2 text-sm cursor-pointer hover:text-red-500 transition"
@@ -61,7 +59,7 @@
       <!-- Vista emergente del carrito -->
       <div
         id="cart-preview"
-        class="absolute right-4 top-16 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50"
+        class="absolute right-4 top-20 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50"
       >
         <h3 class="text-lg font-semibold mb-2 border-b pb-2">Mi carrito</h3>
         <ul id="cart-items" class="space-y-2 max-h-48 overflow-y-auto">
@@ -77,8 +75,8 @@
     </header>
 
     <!-- BARRA SUPERIOR -->
-    <nav class="bg-black text-white text-center py-5 font-semibold shadow">
-      <ul class="flex justify-center gap-8 text-sm">
+    <nav class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto">
+      <ul class="flex justify-center sm:justify-center gap-8 text-sm whitespace-nowrap">
         <li>
           <a
             href="#"
@@ -110,10 +108,10 @@
       </ul>
     </nav>
 
-    <nav class="bg-white shadow relative z-50">
+    <nav class="bg-white shadow relative z-50 overflow-x-auto">
       <div class="max-w-7xl mx-auto px-4">
         <div
-          class="w-full max-w-7xl mx-auto flex justify-center items-center gap-x-20 font-medium text-gray-700 text-base"
+          class="w-full max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-6 font-medium text-gray-700 text-base whitespace-nowrap"
         >
           <div class="relative">
             <button
@@ -406,6 +404,7 @@
       </button>
     </div>
 
+    <!--Ver todos los prod-->
     <section class="py-10 px-4 bg-black-50">
       <h2 class="text-2xl font-bold text-center mb-8">
         Ver todos los productos
