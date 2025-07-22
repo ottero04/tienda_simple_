@@ -1,117 +1,545 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OTechnology</title>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTechnology - Tienda de Tecnología</title>
+    
+    <!-- CDN de TailwindCSS para estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      #mobile-menu {
-        display: none;
-      }
-      @media (max-width: 640px) {
-        #mobile-menu {
-          display: block;
-        }
-        #desktop-menu {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-
-  <body class="bg-black text-white">
-    <!--Header de la pagina-->
-    <header class="w-full bg-black p-4 flex flex-wrap items-center justify-between gap-4">
-      <button onclick="location.href='index.html'" class="text-2xl font-bold">
-        OTechnology<span class="align-super text-xs">®</span>
-      </button>
-
-      <button id="hamburger" class="text-white text-2xl sm:hidden focus:outline-none">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <div class="flex flex-1 max-w-full sm:max-w-2xl mx-6 rounded-full overflow-hidden bg-white order-3 sm:order-none">
-        <input type="text" placeholder="Buscar..." class="flex-1 px-4 py-2 text-black focus:outline-none" />
-        <button class="px-4 bg-white hover:bg-gray-200">
-          <i class="fas fa-search text-black"></i>
+    
+    <!-- CDN de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Archivo de estilos personalizados -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="bg-black text-white">
+    
+    <!-- ========================================= -->
+    <!-- ENCABEZADO PRINCIPAL -->
+    <!-- ========================================= -->
+    <header class="w-full bg-black p-4 flex flex-wrap items-center justify-between gap-4 relative">
+        
+        <!-- Logo de la empresa -->
+        <button onclick="location.href='#inicio'" class="text-2xl font-bold hover:text-orange-600 transition">
+            OTechnology<span class="align-super text-xs">®</span>
         </button>
-      </div>
 
-      <a href="/login" class="flex items-center gap-2 text-sm cursor-pointer hover:text-red-500 transition">
-        <i class="fas fa-user text-xl"></i>
-        <div class="leading-4 text-left uppercase font-medium">
-          ACCEDER A<br />MI CUENTA
+        <!-- Botón hamburguesa (solo visible en móvil) -->
+        <button id="boton-hamburguesa" class="text-white text-2xl sm:hidden focus:outline-none z-50">
+            <i class="fas fa-bars" id="icono-hamburguesa"></i>
+        </button>
+
+        <!-- Barra de búsqueda -->
+        <div class="flex flex-1 max-w-full sm:max-w-2xl mx-6 rounded-full overflow-hidden bg-white order-3 sm:order-none">
+            <input 
+                type="text" 
+                placeholder="Buscar productos..." 
+                class="flex-1 px-4 py-2 text-black focus:outline-none" 
+                id="campo-busqueda"
+            >
+            <button class="px-4 bg-white hover:bg-gray-200 transition" onclick="buscarProductos()">
+                <i class="fas fa-search text-black"></i>
+            </button>
         </div>
-      </a>
 
-      <button id="cart-btn" class="relative text-white hover:text-gray-300 transition">
-        <i class="fas fa-shopping-cart text-2xl"></i>
-      </button>
+        <!-- Enlace de cuenta de usuario (solo desktop) -->
+        <a href="#login" class="hidden sm:flex items-center gap-2 text-sm cursor-pointer hover:text-orange-600 transition">
+            <i class="fas fa-user text-xl"></i>
+            <div class="leading-4 text-left uppercase font-medium">
+                ACCEDER A<br>MI CUENTA
+            </div>
+        </a>
 
-      <div id="cart-preview" class="absolute right-4 top-20 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50">
-        <h3 class="text-lg font-semibold mb-2 border-b pb-2">Mi carrito</h3>
-        <ul id="cart-items" class="space-y-2 max-h-48 overflow-y-auto"></ul>
-        <div class="border-t pt-2 mt-2 flex justify-between text-sm font-medium">
-          <span>Total:</span>
-          <span id="cart-total">$0</span>
+        <!-- Botón del carrito de compras -->
+        <button id="boton-carrito" class="relative text-white hover:text-orange-600 transition">
+            <i class="fas fa-shopping-cart text-2xl"></i>
+            <!-- Contador de productos en el carrito -->
+            <span id="contador-carrito" class="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+        </button>
+
+        <!-- Vista previa del carrito -->
+        <div id="vista-carrito" class="absolute right-4 top-20 w-72 bg-white text-black shadow-lg rounded-lg p-4 hidden z-50">
+            <h3 class="text-lg font-semibold mb-2 border-b pb-2">Mi Carrito</h3>
+            <ul id="lista-productos-carrito" class="space-y-2 max-h-48 overflow-y-auto">
+                <li class="text-gray-500 text-center py-4">Tu carrito está vacío</li>
+            </ul>
+            <div class="border-t pt-2 mt-2 flex justify-between text-sm font-medium">
+                <span>Total:</span>
+                <span id="total-carrito">$0</span>
+            </div>
+            <button class="w-full mt-3 bg-orange-600 text-white py-2 rounded hover:bg-orange-700 transition">
+                Ver Carrito Completo
+            </button>
         </div>
-      </div>
     </header>
 
-    <!-- Menu móvil -->
-    <div id="mobile-menu" class="bg-black text-white sm:hidden px-6 py-4 hidden flex-col gap-3 font-semibold text-sm">
-      <a href="#" class="hover:text-orange-600">Promociones</a>
-      <a href="#" class="hover:text-orange-600">Novedades</a>
-      <a href="#" class="hover:text-orange-600">Garantía</a>
-      <a href="#" class="hover:text-orange-600">Contáctanos</a>
-      <a href="#" class="hover:text-orange-600">Celulares</a>
-      <a href="#" class="hover:text-orange-600">Computadores</a>
-      <a href="#" class="hover:text-orange-600">TV</a>
-      <a href="#" class="hover:text-orange-600">Camaras</a>
-      <a href="#" class="hover:text-orange-600">Videojuegos</a>
-      <a href="#" class="hover:text-orange-600">Audio</a>
-      <a href="#" class="hover:text-orange-600">Accesorios</a>
-      <a href="/login" class="hover:text-orange-600">Acceder a mi cuenta</a>
+    <!-- ========================================= -->
+    <!-- MENÚ MÓVIL -->
+    <!-- ========================================= -->
+    
+    <!-- Overlay oscuro para el menú móvil -->
+    <div id="overlay-menu-movil" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden sm:hidden"></div>
+
+    <!-- Panel del menú móvil -->
+    <div id="menu-movil" class="fixed top-0 right-0 h-full w-80 bg-black text-white transform translate-x-full transition-transform duration-300 z-50 sm:hidden overflow-y-auto">
+        <div class="p-6">
+            
+            <!-- Encabezado del menú móvil -->
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Menú</h2>
+                <button id="cerrar-menu-movil" class="text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Enlace de cuenta de usuario (móvil) -->
+            <a href="#login" class="flex items-center gap-3 p-3 hover:bg-gray-800 rounded mb-4 transition">
+                <i class="fas fa-user text-xl text-orange-600"></i>
+                <div>
+                    <div class="font-medium">ACCEDER A</div>
+                    <div class="font-medium">MI CUENTA</div>
+                </div>
+            </a>
+
+            <!-- Navegación principal móvil -->
+            <div class="space-y-2 mb-6">
+                <h3 class="text-orange-600 font-semibold mb-3">Navegación Principal</h3>
+                <a href="#promociones" class="block p-3 hover:bg-gray-800 rounded transition">
+                    <i class="fas fa-tags mr-3 text-orange-600"></i>Promociones
+                </a>
+                <a href="#novedades" class="block p-3 hover:bg-gray-800 rounded transition">
+                    <i class="fas fa-star mr-3 text-orange-600"></i>Novedades
+                </a>
+                <a href="#garantia" class="block p-3 hover:bg-gray-800 rounded transition">
+                    <i class="fas fa-shield-alt mr-3 text-orange-600"></i>Garantía
+                </a>
+                <a href="#contactanos" class="block p-3 hover:bg-gray-800 rounded transition">
+                    <i class="fas fa-phone mr-3 text-orange-600"></i>Contáctanos
+                </a>
+            </div>
+
+            <!-- Categorías de productos móvil -->
+            <div class="space-y-2">
+                <h3 class="text-orange-600 font-semibold mb-3">Categorías</h3>
+                
+                <!-- Cada categoría es clickeable -->
+                <div class="categoria-movil" data-categoria="celulares">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-mobile-alt mr-3 text-orange-600"></i>Celulares</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="computadores">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-laptop mr-3 text-orange-600"></i>Computadores</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="tv">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-tv mr-3 text-orange-600"></i>TV</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="camaras">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-camera mr-3 text-orange-600"></i>Cámaras</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="videojuegos">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-gamepad mr-3 text-orange-600"></i>Videojuegos</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="audio">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-headphones mr-3 text-orange-600"></i>Audio</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="categoria-movil" data-categoria="accesorios">
+                    <button class="w-full flex items-center justify-between p-3 hover:bg-gray-800 rounded transition">
+                        <span><i class="fas fa-plug mr-3 text-orange-600"></i>Accesorios</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- BARRA SUPERIOR desktop -->
-    <nav id="desktop-menu" class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto">
-      <ul class="flex justify-center sm:justify-center gap-8 text-sm whitespace-nowrap">
-        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Promociones</a></li>
-        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Novedades</a></li>
-        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Garantía</a></li>
-        <li><a href="#" class="dropdown-button py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600">Contáctanos</a></li>
-      </ul>
+    <!-- ========================================= -->
+    <!-- NAVEGACIÓN DESKTOP -->
+    <!-- ========================================= -->
+    
+    <!-- Menú principal superior (solo desktop) -->
+    <nav class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto hidden sm:block">
+        <ul class="flex justify-center gap-8 text-sm whitespace-nowrap">
+            <li>
+                <a href="#promociones" class="py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition">
+                    Promociones
+                </a>
+            </li>
+            <li>
+                <a href="#novedades" class="py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition">
+                    Novedades
+                </a>
+            </li>
+            <li>
+                <a href="#garantia" class="py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition">
+                    Garantía
+                </a>
+            </li>
+            <li>
+                <a href="#contactanos" class="py-4 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition">
+                    Contáctanos
+                </a>
+            </li>
+        </ul>
     </nav>
 
-    <!-- Menú principal -->
-    <!-- SIN CAMBIOS EN ESTA PARTE: sigue con los dropdown existentes para Celulares, Computadores, TV, etc. -->
+    <!-- Navegación de categorías (solo desktop) -->
+    <nav class="bg-white shadow relative z-30 overflow-x-auto hidden sm:block">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-x-6 font-medium text-gray-700 text-base whitespace-nowrap">
+                
+                <!-- ===== DROPDOWN CELULARES ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Celulares <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 w-screen max-w-4xl bg-white shadow-xl p-6 z-50 hidden">
+                        <div class="grid grid-cols-4 gap-6 text-sm text-gray-800">
+                            <div>
+                                <h3 class="font-semibold text-orange-600 mb-3">📱 Celulares</h3>
+                                <div class="space-y-2">
+                                    <a href="#iphone" class="block hover:text-orange-600 transition">iPhone</a>
+                                    <a href="#samsung" class="block hover:text-orange-600 transition">Samsung</a>
+                                    <a href="#xiaomi" class="block hover:text-orange-600 transition">Xiaomi</a>
+                                    <a href="#motorola" class="block hover:text-orange-600 transition">Motorola</a>
+                                    <a href="#huawei" class="block hover:text-orange-600 transition">Huawei</a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-orange-600 mb-3">📱 Tabletas</h3>
+                                <div class="space-y-2">
+                                    <a href="#ipad" class="block hover:text-orange-600 transition">iPad</a>
+                                    <a href="#android-tablets" class="block hover:text-orange-600 transition">Android</a>
+                                    <a href="#samsung-tablets" class="block hover:text-orange-600 transition">Samsung Galaxy Tab</a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-orange-600 mb-3">⌚ Smartwatch</h3>
+                                <div class="space-y-2">
+                                    <a href="#apple-watch" class="block hover:text-orange-600 transition">Apple Watch</a>
+                                    <a href="#samsung-watch" class="block hover:text-orange-600 transition">Samsung Galaxy Watch</a>
+                                    <a href="#huawei-watch" class="block hover:text-orange-600 transition">Huawei Watch</a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-orange-600 mb-3">🔌 Accesorios</h3>
+                                <div class="space-y-2">
+                                    <a href="#cables" class="block hover:text-orange-600 transition">Cables</a>
+                                    <a href="#cargadores" class="block hover:text-orange-600 transition">Cargadores</a>
+                                    <a href="#fundas" class="block hover:text-orange-600 transition">Fundas</a>
+                                    <a href="#audifonos" class="block hover:text-orange-600 transition">Audífonos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Resto del contenido intacto -->
+                <!-- ===== DROPDOWN COMPUTADORES ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Computadores <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#laptops" class="block py-2 hover:text-orange-600 transition">💻 Laptops</a>
+                            <a href="#desktops" class="block py-2 hover:text-orange-600 transition">🖥️ Desktops</a>
+                            <a href="#monitores" class="block py-2 hover:text-orange-600 transition">🖥️ Monitores</a>
+                            <a href="#componentes" class="block py-2 hover:text-orange-600 transition">⚙️ Componentes</a>
+                            <a href="#perifericos" class="block py-2 hover:text-orange-600 transition">🖱️ Periféricos</a>
+                        </div>
+                    </div>
+                </div>
 
-    <script src="js/carrito.js"></script>
-    <script src="js/menu.js"></script>
+                <!-- ===== DROPDOWN TV ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        TV <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#smart-tv" class="block py-2 hover:text-orange-600 transition">📺 Smart TV</a>
+                            <a href="#led-tv" class="block py-2 hover:text-orange-600 transition">💡 LED</a>
+                            <a href="#oled-tv" class="block py-2 hover:text-orange-600 transition">🌟 OLED</a>
+                            <a href="#qled-tv" class="block py-2 hover:text-orange-600 transition">✨ QLED</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DROPDOWN CÁMARAS ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Cámaras <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#dslr" class="block py-2 hover:text-orange-600 transition">📷 DSLR</a>
+                            <a href="#mirrorless" class="block py-2 hover:text-orange-600 transition">📸 Mirrorless</a>
+                            <a href="#action-cameras" class="block py-2 hover:text-orange-600 transition">🎬 Cámaras de Acción</a>
+                            <a href="#lentes" class="block py-2 hover:text-orange-600 transition">🔍 Lentes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DROPDOWN VIDEOJUEGOS ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Videojuegos <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#playstation" class="block py-2 hover:text-orange-600 transition">🎮 PlayStation</a>
+                            <a href="#xbox" class="block py-2 hover:text-orange-600 transition">🎮 Xbox</a>
+                            <a href="#nintendo" class="block py-2 hover:text-orange-600 transition">🎮 Nintendo</a>
+                            <a href="#pc-gaming" class="block py-2 hover:text-orange-600 transition">💻 PC Gaming</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DROPDOWN AUDIO ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Audio <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#audifonos" class="block py-2 hover:text-orange-600 transition">🎧 Audífonos</a>
+                            <a href="#parlantes" class="block py-2 hover:text-orange-600 transition">🔊 Parlantes</a>
+                            <a href="#soundbars" class="block py-2 hover:text-orange-600 transition">📻 Soundbars</a>
+                            <a href="#microfonos" class="block py-2 hover:text-orange-600 transition">🎤 Micrófonos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DROPDOWN ACCESORIOS ===== -->
+                <div class="relative contenedor-dropdown">
+                    <button class="activador-dropdown py-4 px-2 hover:text-orange-600 border-b-2 border-transparent hover:border-orange-600 transition flex items-center gap-1">
+                        Accesorios <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="menu-dropdown absolute top-full left-0 mt-2 bg-white shadow-xl p-4 z-50 w-64 hidden">
+                        <div class="space-y-2">
+                            <a href="#cables-accesorios" class="block py-2 hover:text-orange-600 transition">🔌 Cables</a>
+                            <a href="#cargadores-accesorios" class="block py-2 hover:text-orange-600 transition">🔋 Cargadores</a>
+                            <a href="#fundas-accesorios" class="block py-2 hover:text-orange-600 transition">📱 Fundas</a>
+                            <a href="#soportes" class="block py-2 hover:text-orange-600 transition">🔧 Soportes</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================= -->
+    <!-- CONTENIDO PRINCIPAL -->
+    <!-- ========================================= -->
+    <main>
+        
+        <!-- ===== CARRUSEL DE IMÁGENES ===== -->
+        <div class="relative w-full max-w-5xl mx-auto mt-8 overflow-hidden rounded-xl shadow-lg">
+            <div id="carrusel" class="flex transition-transform duration-700 ease-in-out">
+                <!-- Imágenes del carrusel -->
+                <img src="img/carrusel/iphone16pro.png" class="w-full flex-shrink-0 object-cover" alt="iPhone 16 Pro">
+                <img src="img/carrusel/KV-last (1).jpg" class="w-full flex-shrink-0 object-cover" alt="Samsung Galaxy">
+                <img src="img/carrusel/play_xbox.png" class="w-full flex-shrink-0 object-cover" alt="Gaming Setup">
+                <img src="img/carrusel/tv.png" class="w-full flex-shrink-0 object-cover" alt="Smart TV">
+            </div>
+            
+            <!-- Botones de navegación del carrusel -->
+            <button onclick="anteriorSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md z-10">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="siguienteSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md z-10">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- ===== SECCIÓN DE CATEGORÍAS DE PRODUCTOS ===== -->
+        <section class="py-10 px-4 bg-black" id="inicio">
+            <h2 class="text-2xl font-bold text-center mb-8">Ver todos los productos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-7xl mx-auto">
+                
+                <!-- Botón de categoría Celulares -->
+                <button onclick="irACategoria('celulares')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-mobile-alt text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Celulares</span>
+                    <span class="text-sm text-gray-500">Desde $250.000</span>
+                </button>
+                
+                <!-- Botón de categoría Computadores -->
+                <button onclick="irACategoria('computadores')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-laptop text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Computadores</span>
+                    <span class="text-sm text-gray-500">Desde $750.000</span>
+                </button>
+                
+                <!-- Botón de categoría TV -->
+                <button onclick="irACategoria('tv')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-tv text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">TV</span>
+                    <span class="text-sm text-gray-500">Desde $900.000</span>
+                </button>
+                
+                <!-- Botón de categoría Cámaras -->
+                <button onclick="irACategoria('camaras')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-camera text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Cámaras</span>
+                    <span class="text-sm text-gray-500">Desde $300.000</span>
+                </button>
+                
+                <!-- Botón de categoría Videojuegos -->
+                <button onclick="irACategoria('videojuegos')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-gamepad text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Videojuegos</span>
+                    <span class="text-sm text-gray-500">Desde $180.000</span>
+                </button>
+                
+                <!-- Botón de categoría Audio -->
+                <button onclick="irACategoria('audio')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-headphones text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Audio</span>
+                    <span class="text-sm text-gray-500">Desde $130.000</span>
+                </button>
+                
+                <!-- Botón de categoría Accesorios -->
+                <button onclick="irACategoria('accesorios')" class="flex flex-col items-center bg-white rounded-lg p-4 shadow hover:shadow-md transition transform hover:scale-105">
+                    <i class="fas fa-plug text-4xl text-orange-600 mb-2"></i>
+                    <span class="text-lg font-semibold text-gray-800">Accesorios</span>
+                    <span class="text-sm text-gray-500">Desde $20.000</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECCIONES DE CONTENIDO -->
+        <!-- ========================================= -->
+
+        <!-- ===== SECCIÓN PROMOCIONES ===== -->
+        <section id="promociones" class="py-16 px-4 bg-gray-900 hidden">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8 text-orange-600">🏷️ Promociones Especiales</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white text-black p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">iPhone 16 Pro</h3>
+                        <p class="text-gray-600 mb-4">Hasta 30% de descuento</p>
+                        <button class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition">Ver Oferta</button>
+                    </div>
+                    <div class="bg-white text-black p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">Samsung Galaxy</h3>
+                        <p class="text-gray-600 mb-4">2x1 en accesorios</p>
+                        <button class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition">Ver Oferta</button>
+                    </div>
+                    <div class="bg-white text-black p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">Gaming Setup</h3>
+                        <p class="text-gray-600 mb-4">Financiación 0% interés</p>
+                        <button class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition">Ver Oferta</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN NOVEDADES ===== -->
+        <section id="novedades" class="py-16 px-4 bg-gray-800 hidden">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8 text-orange-600">⭐ Novedades</h2>
+                <p class="text-lg mb-8">Descubre los últimos productos en tecnología</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white text-black p-4 rounded-lg">
+                        <h4 class="font-bold">iPhone 16 Pro Max</h4>
+                        <p class="text-sm text-gray-600">Recién llegado</p>
+                    </div>
+                    <div class="bg-white text-black p-4 rounded-lg">
+                        <h4 class="font-bold">MacBook Pro M4</h4>
+                        <p class="text-sm text-gray-600">Nueva generación</p>
+                    </div>
+                    <div class="bg-white text-black p-4 rounded-lg">
+                        <h4 class="font-bold">PlayStation 5 Pro</h4>
+                        <p class="text-sm text-gray-600">Máximo rendimiento</p>
+                    </div>
+                    <div class="bg-white text-black p-4 rounded-lg">
+                        <h4 class="font-bold">Samsung OLED 8K</h4>
+                        <p class="text-sm text-gray-600">Calidad suprema</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN GARANTÍA ===== -->
+        <section id="garantia" class="py-16 px-4 bg-gray-900 hidden">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8 text-orange-600">🛡️ Garantía OTechnology</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Garantía Extendida</h3>
+                        <p>Hasta 3 años de garantía en productos seleccionados</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-tools text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Servicio Técnico</h3>
+                        <p>Soporte técnico especializado 24/7</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-exchange-alt text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Cambios y Devoluciones</h3>
+                        <p>30 días para cambios sin preguntas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN CONTÁCTANOS ===== -->
+        <section id="contactanos" class="py-16 px-4 bg-gray-800 hidden">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center text-orange-600">📞 Contáctanos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Información de Contacto</h3>
+                        <div class="space-y-3">
+                            <p><i class="fas fa-phone text-orange-600 mr-2"></i> +57 (601) 123-4567</p>
+                            <p><i class="fas fa-envelope text-orange-600 mr-2"></i> info@otechnology.com</p>
+                            <p><i class="fas fa-map-marker-alt text-orange-600 mr-2"></i> Bogotá, Colombia</p>
+                            <p><i class="fas fa-clock text-orange-600 mr-2"></i> Lun - Sáb: 9:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Envíanos un Mensaje</h3>
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Tu nombre" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-600 focus:outline-none">
+                            <input type="email" placeholder="Tu email" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-600 focus:outline-none">
+                            <textarea placeholder="Tu mensaje" rows="4" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:border-orange-600 focus:outline-none"></textarea>
+                            <button type="submit" class="w-full bg-orange-600 text-white py-3 rounded hover:bg-orange-700 transition">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================= -->
+    <!-- SCRIPTS DE JAVASCRIPT -->
+    <!-- ========================================= -->
+    <script src="js/menu-movil.js"></script>
+    <script src="js/menu-desplegable.js"></script>
     <script src="js/carrusel.js"></script>
-    <script>
-      document.getElementById('hamburger').addEventListener('click', function () {
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.toggle('hidden');
-      });
-
-      function toggleMenu(id) {
-        document.querySelectorAll('[id^="dropdown-"]').forEach(menu => {
-          if (menu.id === id) {
-            menu.classList.toggle('hidden');
-          } else {
-            menu.classList.add('hidden');
-          }
-        });
-      }
-    </script>
-  </body>
+    <script src="js/carrito.js"></script>
+    <script src="js/navegacion.js"></script>
+</body>
 </html>

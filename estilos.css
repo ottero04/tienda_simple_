@@ -1,0 +1,122 @@
+/* ========================================= */
+/* ESTILOS PERSONALIZADOS PARA OTECHNOLOGY */
+/* ========================================= */
+
+/* Efecto hover para mostrar menús desplegables en desktop */
+.contenedor-dropdown:hover .menu-dropdown {
+    display: block;
+}
+
+/* Ocultar menús desplegables por defecto */
+.menu-dropdown {
+    display: none;
+}
+
+/* Animación para las flechas en categorías móviles */
+.categoria-movil button:hover i {
+    transform: translateX(5px);
+    transition: transform 0.2s ease;
+}
+
+/* Transiciones suaves para todos los elementos */
+* {
+    transition: all 0.2s ease;
+}
+
+/* ========================================= */
+/* SCROLLBAR PERSONALIZADO */
+/* ========================================= */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ea580c;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #dc2626;
+}
+
+/* ========================================= */
+/* ANIMACIONES DEL MENÚ MÓVIL */
+/* ========================================= */
+#menu-movil {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#menu-movil.abierto {
+    transform: translateX(0);
+}
+
+/* ========================================= */
+/* ANIMACIONES DEL CARRUSEL */
+/* ========================================= */
+#carrusel {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================= */
+/* EFECTOS HOVER */
+/* ========================================= */
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================= */
+/* ANIMACIÓN DE CARGA */
+/* ========================================= */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ========================================= */
+/* ESTILOS RESPONSIVOS ADICIONALES */
+/* ========================================= */
+
+/* Asegurar que el menú móvil se vea bien en pantallas pequeñas */
+@media (max-width: 480px) {
+    #menu-movil {
+        width: 100%;
+    }
+}
+
+/* Mejorar la visibilidad de los dropdowns en pantallas grandes */
+@media (min-width: 1024px) {
+    .menu-dropdown {
+        min-width: 250px;
+    }
+}
+
+/* Estilos para notificaciones del carrito */
+.notificacion-carrito {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #16a34a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.notificacion-carrito.mostrar {
+    transform: translateX(0);
+}
