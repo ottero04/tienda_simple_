@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celulares - OTechnology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../estilos.css">
+</head>
+<body class="bg-gray-100">
+    
+    <!-- Header simplificado -->
+    <header class="w-full bg-black p-4 flex items-center justify-between">
+        <a href="../index.html" class="text-2xl font-bold text-white hover:text-orange-600 transition">
+            OTechnology<span class="align-super text-xs">®</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <a href="carrito.html" class="relative text-white hover:text-orange-600 transition">
+                <i class="fas fa-shopping-cart text-2xl"></i>
+                <span id="contador-carrito" class="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="max-w-7xl mx-auto px-4">
+            <a href="../index.html" class="hover:text-orange-600">Inicio</a>
+            <span class="mx-2">/</span>
+            <span class="text-orange-600">Celulares</span>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Sidebar de filtros -->
+            <div class="lg:w-1/4">
+                <div class="filtros-sidebar bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Filtros</h3>
+                    
+                    <!-- Filtro por marca -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3 text-gray-700">Marca</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-marca mr-2" value="iphone">
+                                <span class="text-gray-600">iPhone</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-marca mr-2" value="samsung">
+                                <span class="text-gray-600">Samsung</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-marca mr-2" value="xiaomi">
+                                <span class="text-gray-600">Xiaomi</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-marca mr-2" value="motorola">
+                                <span class="text-gray-600">Motorola</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-marca mr-2" value="huawei">
+                                <span class="text-gray-600">Huawei</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por precio -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3 text-gray-700">Precio</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="precio" class="filtro-precio mr-2" value="0-500000">
+                                <span class="text-gray-600">Hasta $500.000</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="precio" class="filtro-precio mr-2" value="500000-1000000">
+                                <span class="text-gray-600">$500.000 - $1.000.000</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="precio" class="filtro-precio mr-2" value="1000000-2000000">
+                                <span class="text-gray-600">$1.000.000 - $2.000.000</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="precio" class="filtro-precio mr-2" value="2000000+">
+                                <span class="text-gray-600">Más de $2.000.000</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por capacidad -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3 text-gray-700">Capacidad</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-capacidad mr-2" value="64gb">
+                                <span class="text-gray-600">64 GB</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-capacidad mr-2" value="128gb">
+                                <span class="text-gray-600">128 GB</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-capacidad mr-2" value="256gb">
+                                <span class="text-gray-600">256 GB</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filtro-capacidad mr-2" value="512gb">
+                                <span class="text-gray-600">512 GB</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button onclick="limpiarFiltros()" class="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700 transition">
+                        Limpiar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="lg:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-3xl font-bold text-gray-800">
+                        <i class="fas fa-mobile-alt mr-3 text-orange-600"></i>Celulares
+                    </h1>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-600">Ordenar por:</span>
+                        <select id="ordenar-por" class="border border-gray-300 rounded px-3 py-2">
+                            <option value="relevancia">Relevancia</option>
+                            <option value="precio-menor">Precio: Menor a Mayor</option>
+                            <option value="precio-mayor">Precio: Mayor a Menor</option>
+                            <option value="nombre">Nombre A-Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Grid de productos -->
+                <div id="productos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </div>
+
+                <!-- Paginación -->
+                <div class="pagination mt-8">
+                    <button id="prev-page" class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <div id="page-numbers" class="flex gap-2">
+                        <!-- Los números de página se generarán dinámicamente -->
+                    </div>
+                    <button id="next-page" class="pagination-btn">
+                        Siguiente <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/carrito.js"></script>
+    <script src="../js/productos-celulares.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - OTechnology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../estilos.css">
+</head>
+<body class="bg-gray-100">
+    
+    <!-- Header -->
+    <header class="w-full bg-black p-4 flex items-center justify-center">
+        <a href="../index.html" class="text-2xl font-bold text-white hover:text-orange-600 transition">
+            OTechnology<span class="align-super text-xs">®</span>
+        </a>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                    <span class="ml-2 text-orange-600 font-semibold">Información Personal</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-200 mx-4">
+                    <div class="h-1 bg-orange-600 w-1/3"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                    <span class="ml-2 text-gray-600">Información de Pago</span>
+                </div>
+                <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                    <span class="ml-2 text-gray-600">Confirmación</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Formulario de checkout -->
+            <div class="lg:col-span-2">
+                
+                <!-- Paso 1: Información Personal -->
+                <div id="paso-1" class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-user mr-3 text-orange-600"></i>Información Personal
+                    </h2>
+                    
+                    <form id="form-personal">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">Nombre *</label>
+                                <input type="text" id="nombre" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Apellido *</label>
+                                <input type="text" id="apellido" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email *</label>
+                                <input type="email" id="email" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono *</label>
+                                <input type="tel" id="telefono" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Documento de Identidad *</label>
+                                <input type="text" id="documento" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tipo de Documento *</label>
+                                <select id="tipo-documento" class="form-input" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="cc">Cédula de Ciudadanía</option>
+                                    <option value="ce">Cédula de Extranjería</option>
+                                    <option value="pasaporte">Pasaporte</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">Dirección de Envío</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">Dirección *</label>
+                                <input type="text" id="direccion" class="form-input" placeholder="Calle, Carrera, Avenida..." required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ciudad *</label>
+                                <input type="text" id="ciudad" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Departamento *</label>
+                                <select id="departamento" class="form-input" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="bogota">Bogotá D.C.</option>
+                                    <option value="antioquia">Antioquia</option>
+                                    <option value="valle">Valle del Cauca</option>
+                                    <option value="atlantico">Atlántico</option>
+                                    <option value="santander">Santander</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Código Postal</label>
+                                <input type="text" id="codigo-postal" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Información Adicional</label>
+                                <input type="text" id="info-adicional" class="form-input" placeholder="Apartamento, oficina, etc.">
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="siguientePaso()" class="btn-primary mt-6">
+                            Continuar al Pago <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Paso 2: Información de Pago -->
+                <div id="paso-2" class="bg-white rounded-lg shadow-lg p-6 mb-6 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-credit-card mr-3 text-orange-600"></i>Información de Pago
+                    </h2>
+                    
+                    <form id="form-pago">
+                        <div class="mb-6">
+                            <label class="form-label">Método de Pago *</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-orange-600 transition">
+                                    <input type="radio" name="metodo-pago" value="tarjeta" class="mr-3" checked>
+                                    <div class="text-center">
+                                        <i class="fas fa-credit-card text-2xl text-orange-600 mb-2"></i>
+                                        <div class="font-semibold">Tarjeta</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-orange-600 transition">
+                                    <input type="radio" name="metodo-pago" value="pse" class="mr-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-university text-2xl text-orange-600 mb-2"></i>
+                                        <div class="font-semibold">PSE</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-orange-600 transition">
+                                    <input type="radio" name="metodo-pago" value="efectivo" class="mr-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-money-bill text-2xl text-orange-600 mb-2"></i>
+                                        <div class="font-semibold">Efectivo</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="datos-tarjeta">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group md:col-span-2">
+                                    <label class="form-label">Número de Tarjeta *</label>
+                                    <input type="text" id="numero-tarjeta" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Fecha de Vencimiento *</label>
+                                    <input type="text" id="fecha-vencimiento" class="form-input" placeholder="MM/AA" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">CVV *</label>
+                                    <input type="text" id="cvv" class="form-input" placeholder="123" maxlength="4">
+                                </div>
+                                <div class="form-group md:col-span-2">
+                                    <label class="form-label">Nombre en la Tarjeta *</label>
+                                    <input type="text" id="nombre-tarjeta" class="form-input" placeholder="Como aparece en la tarjeta">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-6">
+                            <button type="button" onclick="anteriorPaso()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Volver
+                            </button>
+                            <button type="button" onclick="siguientePaso()" class="btn-primary">
+                                Revisar Pedido <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Paso 3: Confirmación -->
+                <div id="paso-3" class="bg-white rounded-lg shadow-lg p-6 mb-6 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-check-circle mr-3 text-orange-600"></i>Confirmar Pedido
+                    </h2>
+                    
+                    <div id="resumen-pedido" class="space-y-4 mb-6">
+                        <!-- El resumen se generará dinámicamente -->
+                    </div>
+
+                    <div class="flex items-center mb-6">
+                        <input type="checkbox" id="acepto-terminos" class="mr-3">
+                        <label for="acepto-terminos" class="text-sm text-gray-600">
+                            Acepto los <a href="#" class="text-orange-600 hover:underline">términos y condiciones</a> y la <a href="#" class="text-orange-600 hover:underline">política de privacidad</a>
+                        </label>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button type="button" onclick="anteriorPaso()" class="btn-secondary">
+                            <i class="fas fa-arrow-left mr-2"></i>Volver
+                        </button>
+                        <button type="button" onclick="confirmarPedido()" class="btn-primary">
+                            <i class="fas fa-lock mr-2"></i>Confirmar y Pagar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen del pedido -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-lg p-6 sticky top-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Resumen del Pedido</h3>
+                    
+                    <div id="productos-checkout" class="space-y-3 mb-6">
+                        <!-- Los productos se cargarán dinámicamente -->
+                    </div>
+
+                    <div class="space-y-3 mb-6 pt-4 border-t border-gray-200">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal:</span>
+                            <span id="subtotal-checkout" class="font-semibold">$0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Envío:</span>
+                            <span id="costo-envio-checkout" class="font-semibold">Gratis</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">IVA (19%):</span>
+                            <span id="iva-checkout" class="font-semibold">$0</span>
+                        </div>
+                        <hr class="border-gray-300">
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>Total:</span>
+                            <span id="total-checkout" class="text-orange-600">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-gray-500">
+                        <i class="fas fa-shield-alt mr-1"></i>
+                        Compra 100% segura y protegida
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/checkout.js"></script>
+</body>
+</html>
