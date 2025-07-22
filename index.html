@@ -10,6 +10,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <style>
+      #mobile-menu {
+        display: none;
+      }
+      @media (max-width: 640px) {
+        #mobile-menu {
+          display: block;
+        }
+        #desktop-menu {
+          display: none;
+        }
+      }
+    </style>
   </head>
 
   <body class="bg-black text-white">
@@ -22,15 +36,10 @@
         OTechnology<span class="align-super text-xs">®</span>
       </button>
 
-      <nav
-        class="bg-black text-white text-center py-5 font-semibold shadow overflow-x-auto"
-      >
-        <ul
-          class="flex justify-center sm:justify-center gap-8 text-sm whitespace-nowrap"
-        >
-          ...
-        </ul>
-      </nav>
+      <!--Boton burguer-->
+      <button id="hamburger" class="text-white text-2xl sm:hidden focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
 
       <!--Buscador-->
       <div
@@ -83,6 +92,21 @@
         </div>
       </div>
     </header>
+
+    <div id="mobile-menu" class="bg-black text-white sm:hidden px-6 py-4 hidden flex-col gap-3 font-semibold text-sm">
+      <a href="#" class="hover:text-orange-600">Promociones</a>
+      <a href="#" class="hover:text-orange-600">Novedades</a>
+      <a href="#" class="hover:text-orange-600">Garantía</a>
+      <a href="#" class="hover:text-orange-600">Contáctanos</a>
+      <a href="#" class="hover:text-orange-600">Celulares</a>
+      <a href="#" class="hover:text-orange-600">Computadores</a>
+      <a href="#" class="hover:text-orange-600">TV</a>
+      <a href="#" class="hover:text-orange-600">Camaras</a>
+      <a href="#" class="hover:text-orange-600">Videojuegos</a>
+      <a href="#" class="hover:text-orange-600">Audio</a>
+      <a href="#" class="hover:text-orange-600">Accesorios</a>
+      <a href="/login" class="hover:text-orange-600">Acceder a mi cuenta</a>
+    </div>
 
     <!-- BARRA SUPERIOR -->
     <nav
